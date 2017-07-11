@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        li{
+            list-style: none;
+        }
+        img{
+            border:0;
+        }
+        #container{
+            position:relative;
+            width:276px;
+            height:380px;
+            margin:100px auto;
+        }
+
+        #picture img{
+            display:none;
+        }
+        #picture .selected{
+            display:block;
+        }
+        #nav li{
+            float:left;
+        }
+        #narrow div{
+            float:left;
+        }
+        #narrow{
+            position:absolute;
+            left:10px;
+            bottom:10px;
+        }
+        #nav{
+            position:absolute;
+            right:20px;
+            bottom:10px;
+        }
+        #nav li,#narrow div{
+            width:15px;
+            height:15px;
+            background:aqua;
+            color:azure;
+            text-align:center;
+            line-height:15px;
+            margin-right:5px;
+            cursor:pointer;
+        }
+
+        #nav .selected{
+            background:sandybrown;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="picture">
+        <img src="m3.jpg" alt="" class="selected">
+        <img src="m1.jpg" alt="">
+        <img src="m2.jpg" alt="">
+        <img src="m4.jpg" alt="">
+    </div>
+    <ul id="nav">
+        <li class="selected">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <div id="narrow">
+        <div id="left">&lt</div>
+        <div id="right">&gt</div>
+    </div>
+</div>
+<script>
+    var ona=document.getElementById("nav");
+    var oli=ona.getElementsByTagName("li");
+    var opic=document.getElementById("picture");
+    var oim=opic.getElementsByTagName("img");
+    var olt=document.getElementById("left");
+    var ogt=document.getElementById("right");
+    var con=document.getElementById("container");
+    var nowindex=0;
+    var timer;
+    for(var i=0;i<oli.length;i++) {
+        oli[i].index=i;
+        oli[i].onmouseover=function(){
+            nowindex=this.index;
+            change();
+        }
+    }
+    olt.onclick=ogt.onclick=function(){
+        if(this==olt){
+            nowindex--;
+            if(nowindex==-1){
+                nowindex=oli.length-1;
+            }
+        }
+        else{
+            nowindex++;
+            if(nowindex==oli.length){
+                nowindex=0;
+            }
+        }
+        change();}
+    function change(){
+        for (var i = 0; i < oli.length; i++) {
+
+            oli[i].className = "";
+            oim[i].className="";
+        }
+        oli[nowindex].className = "selected";
+        oim[nowindex].className="selected";
+    }
+    con.onmouseover=function(){
+        clearInterval(timer);
+    };
+    con.onmouseout=function(){
+        timer=setInterval(function(){
+            ogt.onclick();
+        },1000)
+    };
+    time();
+    function time(){  timer=setInterval(function(){
+        ogt.onclick();
+    },1000)}
+
+
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
